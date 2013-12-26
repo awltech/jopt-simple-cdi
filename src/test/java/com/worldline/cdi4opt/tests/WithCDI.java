@@ -1,5 +1,7 @@
 package com.worldline.cdi4opt.tests;
 
+import java.io.IOException;
+
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 
@@ -10,10 +12,10 @@ import com.worldline.cdi4jopt.core.JOptInjector;
 
 public class WithCDI {
 
-	@JOptArgument(name = "value1", required = true)
+	@JOptArgument(name = "value1", required = true, description = "This is value1")
 	private String value1;
 
-	@JOptArgument(name = "value2", required = true)
+	@JOptArgument(name = "value2", required = true, description = "This is value2")
 	private String value2;
 
 	@JOptParser
@@ -36,6 +38,11 @@ public class WithCDI {
 		injector.inject();
 		System.out.println(this.value1);
 		System.out.println(this.value2);
+		try {
+			optionParser.printHelpOn(System.out);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void main(String[] args) {
