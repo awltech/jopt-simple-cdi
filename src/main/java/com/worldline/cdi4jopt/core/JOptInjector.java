@@ -158,6 +158,9 @@ public class JOptInjector {
 		}
 
 		final OptionSet optionSet = getOptionSet(this.pojo);
+		if (optionSet == null)
+			return;
+
 		for (final Field field : this.argumentFields.keySet()) {
 			final String optionName = this.argumentFields.get(field);
 			if (optionSet.has(optionName)) {
